@@ -1,0 +1,32 @@
+#include iostream
+#include vector
+using namespace std;
+
+int students, rewards;
+vector<vector<int>> d; //d[students][rewards] hang, cot so 0 khong su dung
+
+void Input()
+{
+    f >> students >> rewards;
+}
+
+void Process()
+{
+    d.resize(students + 1, vector<int>(rewards + 1, 0));
+
+    d[0][0] = 1;
+
+    for (int s = 1; s < students + 1; ++s)
+        {
+            for (int r = 0; r < s; ++r)
+                {
+                    d[s][r] = d[r][r];
+                }
+
+            for (int r = s; r < rewards + 1; ++r)
+                {
+                    d[s][r] =  d[s - 1][r] + d[s][r - s];
+                    
+                }
+        }
+}
